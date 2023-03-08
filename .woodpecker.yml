@@ -1,6 +1,6 @@
 pipeline:
   build:
-    image: python:alpine
+    image: python
     commands:
       - apk add git
       - pip install -U platformio
