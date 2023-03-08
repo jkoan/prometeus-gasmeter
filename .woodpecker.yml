@@ -1,0 +1,12 @@
+pipeline:
+  build:
+    image: python:alpine
+    commands:
+      - pip install -U platformio
+      - pio update
+      - pio run
+      - pio run --target upload --environment gas_keller
+  a-test-step:
+    image: debian
+    commands:
+      - echo "Testing.."
