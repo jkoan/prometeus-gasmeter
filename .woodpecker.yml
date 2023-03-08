@@ -6,5 +6,4 @@ pipeline:
       - pip install -U platformio
       - pio update
       - pio run
-      - ping -c 5 gas.lan
       - pio run --target upload --environment gas_keller
