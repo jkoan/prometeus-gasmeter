@@ -50,7 +50,7 @@ uint32 inpult_num=0;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP);
 unsigned long long boot_time;
-SchmittTrigger<int> trigger(570, 520);
+SchmittTrigger<int> trigger(550, 520);
 SchmittButton schmittButton(trigger, false);
 
 struct tim_and_val {
@@ -72,6 +72,13 @@ void handleNotFound(){
   server.send(200, "text/plain", message);
 }
 
+void handleReboot(){
+  server.send(200, "text/plain", "Restart_Ok");
+  delay(500);
+  ESP.restart();
+}
+
+
 void setup(void){
   pinMode(led, OUTPUT);
   digitalWrite(led, LOW);
@@ -83,11 +90,15 @@ void setup(void){
   File f = LittleFS.open("/wifi.txt","r");
   if(f){
     while(f.available()){
-      String user = f.readStringUntil('r');
-      String pass = f.readStringUntil('r');
+      String user = f.readStringUntil('\n');
+      String pass = f.readStringUntil('\n');
       wifiMulti.addAP(user.c_str(), pass.c_str());
+      Serial.println(user+":"+pass);
     }
   }
+
+  f.close();
+  LittleFS.end();
 
   Serial.println("");
 
@@ -119,6 +130,7 @@ void setup(void){
   Serial.println(boot_time);
 
   server.on("/metrics", handleNotFound);
+  server.on("/reboot", handleNotFound);
   //server.onNotFound(handleNotFound);
 
   server.begin();
