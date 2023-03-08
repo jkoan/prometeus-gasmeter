@@ -2,7 +2,7 @@ pipeline:
   build:
     image: python
     commands:
-      - apk add git
+      - apt update && apt install -y git
       - pip install -U platformio
       - pio update
       - pio run
