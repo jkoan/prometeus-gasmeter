@@ -1,6 +1,6 @@
 pipeline:
   build:
-    image: python
+    image: 19a48fa7cf48
     commands:
       - apt update && apt install -y git
       - pip install -U platformio
