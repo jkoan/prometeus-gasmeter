@@ -1,5 +1,5 @@
 # Smart Prometheus Gasmeter
-This Project uses an analog hall effect Sensor and a Software Schmittrigger to count the impulses of a gas meter.
+This Project uses an analog hall effect Sensor and a ESP8266 together with a software Schmittrigger to count the impulses of a gas meter.
 The Count is then exposed as a Prometheus metric.
 
 ## Project State
