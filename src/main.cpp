@@ -10,6 +10,7 @@
 #include <SchmittTrigger.h>
 #include <VirtualButton.h>
 #include <ESPTelnet.h>
+#include <CircularBuffer.h>
 
 // ESP8266 specific Libs
 #include <ESP8266WiFi.h>
@@ -37,6 +38,7 @@ bool SchmittButton::read(void){
   return trigger_.output();
 }
 
+
 #define abs(x) ((x)>0?(x):-(x))
 
 ESP8266WiFiMulti wifiMulti;
@@ -50,7 +52,7 @@ uint32 inpult_num=0;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP);
 unsigned long long boot_time;
-SchmittTrigger<int> trigger(550, 520);
+SchmittTrigger<int> trigger(520, 550);
 SchmittButton schmittButton(trigger, false);
 
 struct tim_and_val {
@@ -130,7 +132,7 @@ void setup(void){
   Serial.println(boot_time);
 
   server.on("/metrics", handleNotFound);
-  server.on("/reboot", handleNotFound);
+  server.on("/reboot", handleReboot);
   //server.onNotFound(handleNotFound);
 
   server.begin();
