@@ -10,7 +10,6 @@
 #include <SchmittTrigger.h>
 #include <VirtualButton.h>
 #include <ESPTelnet.h>
-#include <CircularBuffer.h>
 
 // ESP8266 specific Libs
 #include <ESP8266WiFi.h>
@@ -60,7 +59,7 @@ struct tim_and_val {
  uint32 value;
 } ;
 
-void handleNotFound(){
+void handleMetrics(){
   String message = "";
   message += "# HELP gas gasmeter inpulses\n";
   message += "# TYPE gas counter\n";
@@ -131,9 +130,8 @@ void setup(void){
   Serial.print("Boot TimeDate: ");
   Serial.println(boot_time);
 
-  server.on("/metrics", handleNotFound);
+  server.on("/metrics", handleMetrics);
   server.on("/reboot", handleReboot);
-  //server.onNotFound(handleNotFound);
 
   server.begin();
   Serial.println("HTTP server started");
