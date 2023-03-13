@@ -38,21 +38,20 @@ bool SchmittButton::read(void){
 }
 
 
-#define abs(x) ((x)>0?(x):-(x))
-
 ESP8266WiFiMulti wifiMulti;
-ESP8266WebServer server(80);
 ESPTelnet telnet;
+WiFiUDP ntpUDP;
 
+ESP8266WebServer server(80);
+NTPClient timeClient(ntpUDP);
+SchmittTrigger<int> trigger(520, 550);
+SchmittButton schmittButton(trigger, false);
 
 const int hall_port = D4;
 const int led = LED_BUILTIN;
+
 uint32 inpult_num=0;
-WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP);
 unsigned long long boot_time;
-SchmittTrigger<int> trigger(520, 550);
-SchmittButton schmittButton(trigger, false);
 
 void handleMetrics(){
   String message = "";
