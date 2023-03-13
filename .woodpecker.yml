@@ -1,9 +1,8 @@
 pipeline:
   build:
-    image: 19a48fa7cf48
+    image: python
     commands:
       - apt update && apt install -y git
       - pip install -U platformio
       - pio update
       - pio run
-      - pio run --target upload --environment gas_keller
