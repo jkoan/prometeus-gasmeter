@@ -158,6 +158,6 @@ void loop(void){
     inpult_num++;
   }
 
-  // Kleine Pause für wifi Kommunikation
+  // Give wifi time to communicate
   delay(100);
 }
