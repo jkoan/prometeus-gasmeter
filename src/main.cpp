@@ -54,11 +54,6 @@ unsigned long long boot_time;
 SchmittTrigger<int> trigger(520, 550);
 SchmittButton schmittButton(trigger, false);
 
-struct tim_and_val {
- uint32 time;
- uint32 value;
-} ;
-
 void handleMetrics(){
   String message = "";
   message += "# HELP gas gasmeter inpulses\n";
