@@ -14,5 +14,11 @@ Working and maintained. Used by myself.
 ### Potential Future features
 - Auto ajustment of trigger values
 
+## Howto setup WIFI
+1) To setup your WIFI's copy the data/wifi-sample.txt to data/wifi.txt 
+2) Put SSID and Password in Lines following each other
+3) Build and Upload the Sketch
+4) Build and upload the SPI-FS
+
 ## TODOs
 - Move Schmittigger and Button implentation into own Class and only call update() on it in loop
